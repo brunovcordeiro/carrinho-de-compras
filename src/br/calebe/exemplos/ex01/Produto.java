@@ -10,7 +10,8 @@ public class Produto {
         this.preco = preco;
     }
 
-    public double getPreco() {
+    public double getPreco() throws ProdutoNegativoExpected{
+        if (preco < 0) {throws new ProdutoNegativoExpected();}
         return preco;
     }
 
