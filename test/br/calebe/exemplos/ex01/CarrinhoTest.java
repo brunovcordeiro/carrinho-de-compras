@@ -1,5 +1,7 @@
 package br.calebe.exemplos.ex01;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import static org.junit.Assert.assertArrayEquals;
 import org.junit.Before;
@@ -49,4 +51,59 @@ public class CarrinhoTest {
         original = carrinho.menorProduto();
         Assert.assertEquals(original, copia);
     }
+    
+    @Test
+    public void ListaProdutoCarrinho() throws CarrinhoVazioExpected, ProdutoNegativoExpected { //Adiciona no carrinho lista de produto negativo e imprimi causando erro
+        Produto anel = new Produto("Anel",1000);
+        Produto celular = new Produto("Iphone" , 5000);
+        Produto mouse = new Produto ("Mouse" , 500);
+        carrinho.add(mouse);
+        carrinho.add(celular);
+        carrinho.add(anel);
+        Assert.assertNotNull(carrinho.ListaCarrinho());
+        carrinho.ImprimiCarrinho();
+        
+    }
+    
+    @Test
+    public void ListaProdutoCarrinhoNegativo() throws CarrinhoVazioExpected, ProdutoNegativoExpected { //Adiciona no carrinho lista de produto negativo e imprimi causando erro
+        Produto anel = new Produto("Anel",1000);
+        Produto celular = new Produto("Iphone" , 5000);
+        Produto mouse = new Produto ("Mouse" , -500);
+        carrinho.add(mouse);
+        carrinho.add(celular);
+        carrinho.add(anel);
+        Assert.assertNotNull(carrinho.ListaCarrinho());
+        carrinho.ImprimiCarrinho();
+        
+    }
+    
+    @Test
+    public void RemoveProdutoCarrinho () throws ProdutoNegativoExpected, CarrinhoVazioExpected{
+        Produto anel = new Produto("Anel",1000);
+        Produto celular = new Produto("Iphone" , 5000);
+        Produto mouse = new Produto ("Mouse" , 500);
+        carrinho.add(mouse);
+        carrinho.add(celular);
+        carrinho.add(anel);
+        carrinho.RemoveProduto(anel);
+        List<Produto> p = new ArrayList<>();
+        p = carrinho.ListaCarrinho();
+        for (Produto produto : p){
+            Assert.assertNotSame(produto , anel);
+        }        
+    }
+    
+    @Test public void TotalCompraCarrinho() throws ProdutoNegativoExpected{
+        Produto anel = new Produto("Anel",1000);
+        Produto celular = new Produto("Iphone" , 5000);
+        Produto mouse = new Produto ("Mouse" , 500);
+        carrinho.add(mouse);
+        carrinho.add(celular);
+        carrinho.add(anel);
+        Double ValorTotal;
+        ValorTotal = carrinho.ValorTotal();
+        Assert.assertNotNull(ValorTotal);      
+    }
+    
 }
