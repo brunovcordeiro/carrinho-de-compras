@@ -18,12 +18,15 @@ public class ProdutoTest {
     
     private Produto anel;
     private Produto celular;
+    private Produto mouse;
 
     @Before
     public void CriandProduto() {
         
         anel = new Produto("Anel",1000);
         celular = new Produto("Iphone" , 5000);
+        mouse = new Produto ("Mouse" , -500);
+        
         
     }
     
@@ -35,8 +38,17 @@ public class ProdutoTest {
     
     @Test
     public void TestaEquals(){
-        Assert.assertFalse(anel.equals(anel));
+        Assert.assertTrue(anel.equals(anel));
     }
     
+    @Test(expected = ProdutoNegativoExpected.class)
+    public void TestaPrecoNegativo() throws ProdutoNegativoExpected{
+        boolean teste;
+        if (mouse.getPreco() < 0)
+            teste = true;
+        else teste = false;
+        Assert.assertFalse(teste);
+        
+    }
     
 }

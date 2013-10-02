@@ -11,8 +11,12 @@ public class Produto {
     }
 
     public double getPreco() throws ProdutoNegativoExpected{
-        if (preco < 0) {throws new ProdutoNegativoExpected();}
+        if (preco < 0) {throw new ProdutoNegativoExpected();}
         return preco;
+    }
+    
+     public String getNome() throws ProdutoNegativoExpected{
+        return nome;
     }
 
     @Override
